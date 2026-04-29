@@ -69,7 +69,7 @@ export function useCamera() {
 
   // for two pointers
   const onTouchMove = useCallback((e: React.TouchEvent) => {
-    if (e.touches.length === 2) return;
+    if (e.touches.length !== 2) return;
 
     const dist = getTouchDistance(e.touches);
 
