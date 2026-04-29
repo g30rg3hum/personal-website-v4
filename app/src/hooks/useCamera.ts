@@ -19,8 +19,11 @@ export function useCamera() {
 
   // keep same reference
   // unless camera changes
+  // desktop panning
   const onPointerDown = useCallback(
     (e: React.PointerEvent) => {
+      if (e.pointerType === "touch") return;
+
       isPanning.current = true;
       // offset/gap between mouse and canvas origin
       panStart.current = { x: e.clientX - camera.x, y: e.clientY - camera.y };
@@ -29,7 +32,7 @@ export function useCamera() {
   );
 
   const onPointerMove = useCallback((e: React.PointerEvent) => {
-    if (!isPanning.current) return;
+    if (!isPanning.current || e.pointerType === "touch") return;
     // get the new camera position and set it
     // preserves the gap between mouse and canvas origin
     // moves canvas with mouse
@@ -67,23 +70,50 @@ export function useCamera() {
     return Math.sqrt(dx * dx + dy * dy);
   };
 
-  // for two pointers
-  const onTouchMove = useCallback((e: React.TouchEvent) => {
-    if (e.touches.length !== 2) return;
+  // for mobile zoom + pan
+  const onTouchMove = useCallback(
+    (e: React.TouchEvent) => {
+      if (e.touches.length === 1) {
+        // single finger pan
+        const touch = e.touches[0];
 
-    const dist = getTouchDistance(e.touches);
+        // for detecting first frame and set start point
+        // instead of relying on separate event
+        if (lastTouchDist.current === null) {
+          panStart.current = {
+            x: touch.clientX - camera.x,
+            y: touch.clientY - camera.y,
+          };
 
-    // sets the first frame
-    if (lastTouchDist.current !== null) {
-      const scale = dist / lastTouchDist.current;
-      setCamera((prev) => {
-        const newZoom = Math.min(Math.max(prev.zoom * scale, minZoom), maxZoom);
-        return { ...prev, zoom: newZoom };
-      });
-    }
+          lastTouchDist.current = 0;
+        }
 
-    lastTouchDist.current = dist;
-  }, []);
+        setCamera((prev) => ({
+          ...prev,
+          x: touch.clientX - panStart.current.x,
+          y: touch.clientY - panStart.current.y,
+        }));
+      } else if (e.touches.length === 2) {
+        // pinch zoom
+        const dist = getTouchDistance(e.touches);
+
+        // sets the first frame
+        if (lastTouchDist.current && lastTouchDist.current > 0) {
+          const scale = dist / lastTouchDist.current;
+          setCamera((prev) => {
+            const newZoom = Math.min(
+              Math.max(prev.zoom * scale, minZoom),
+              maxZoom,
+            );
+            return { ...prev, zoom: newZoom };
+          });
+        }
+
+        lastTouchDist.current = dist;
+      }
+    },
+    [camera.x, camera.y],
+  );
 
   const onTouchEnd = useCallback(() => {
     lastTouchDist.current = null;
