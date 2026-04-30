@@ -17,11 +17,18 @@ export function useCamera() {
   // compare to know if fingers moved closer or apart
   const lastTouchDist = useRef<number | null>(null);
 
+  const animationFrameRef = useRef<number | null>(null);
+
   // keep same reference
   // unless camera changes
   // desktop panning
   const onPointerDown = useCallback(
     (e: React.PointerEvent) => {
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+        animationFrameRef.current = null;
+      }
+
       if (e.pointerType === "touch") return;
 
       isPanning.current = true;
@@ -73,6 +80,11 @@ export function useCamera() {
   // for mobile zoom + pan
   const onTouchMove = useCallback(
     (e: React.TouchEvent) => {
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+        animationFrameRef.current = null;
+      }
+
       if (e.touches.length === 1) {
         // single finger pan
         const touch = e.touches[0];
@@ -119,6 +131,51 @@ export function useCamera() {
     lastTouchDist.current = null;
   }, []);
 
+  const panTo = useCallback(
+    (worldX: number, worldY: number, duration = 500) => {
+      // cancel any in-progress animation
+      if (animationFrameRef.current)
+        cancelAnimationFrame(animationFrameRef.current);
+
+      // camera.x/y: shift from top left of screen
+      const startX = camera.x;
+      const startY = camera.y;
+      const startTime = performance.now();
+
+      // start at screen center
+      // world coordinate scaled to zoom
+      // camera moves and world content position in opposite direction
+      const targetX = window.innerWidth / 2 - worldX * camera.zoom;
+      const targetY = window.innerHeight / 2 - worldY * camera.zoom;
+
+      // takes t (0 - 1) so motion starts slow, speeds up, then slows down
+      const easeInOutCubic = (t: number) =>
+        t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
+      const animate = (now: number) => {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = easeInOutCubic(progress);
+
+        setCamera((prev) => ({
+          ...prev,
+          // travel the distance eased
+          x: startX + (targetX - startX) * eased,
+          y: startY + (targetY - startY) * eased,
+        }));
+
+        if (progress < 1) {
+          animationFrameRef.current = requestAnimationFrame(animate);
+        } else {
+          animationFrameRef.current = null;
+        }
+      };
+
+      animationFrameRef.current = requestAnimationFrame(animate);
+    },
+    [camera.x, camera.y, camera.zoom],
+  );
+
   return {
     camera,
     onPointerDown,
@@ -127,5 +184,6 @@ export function useCamera() {
     onWheel,
     onTouchMove,
     onTouchEnd,
+    panTo,
   };
 }

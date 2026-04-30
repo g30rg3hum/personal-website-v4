@@ -1,5 +1,6 @@
 import { useCamera } from "../../hooks/useCamera";
 import StartSection from "../content/start-section";
+import Navigation from "../layout/navigation";
 import CanvasWorld from "./canvas-world";
 
 export default function CanvasViewport() {
@@ -11,6 +12,7 @@ export default function CanvasViewport() {
     onWheel,
     onTouchEnd,
     onTouchMove,
+    panTo,
   } = useCamera();
 
   return (
@@ -30,6 +32,10 @@ export default function CanvasViewport() {
         backgroundPosition: `${camera.x}px ${camera.y}px`,
       }}
     >
+      {/* sticky navigation */}
+      <Navigation panTo={panTo} />
+
+      {/* canvas items */}
       <CanvasWorld x={camera.x} y={camera.y} zoom={camera.zoom}>
         <StartSection />
       </CanvasWorld>
