@@ -17,7 +17,7 @@ export default function CanvasViewport() {
 
   return (
     <div
-      className="w-screen h-screen overflow-hidden relative touch-none"
+      className="w-screen h-screen overflow-hidden relative text-sm"
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
       onPointerUp={onPointerUp}

@@ -10,7 +10,7 @@ export default function Section({ x, y, ref, children, onLoad }: Props) {
   return (
     <div
       ref={ref}
-      className="absolute select-none pointer-events-none"
+      className="absolute select-none"
       style={{ left: x, top: y }}
       onLoad={onLoad}
     >
