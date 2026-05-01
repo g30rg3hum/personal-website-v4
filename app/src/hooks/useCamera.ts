@@ -66,7 +66,16 @@ export function useCamera() {
         maxZoom,
       );
 
-      return { ...prev, zoom: newZoom };
+      // adjust position so point under cursor is fixed
+      const mouseX = e.clientX;
+      const mouseY = e.clientY;
+      // how far into the canvas is my mouse
+      // scaled by how much the zoom has changed
+      // start at cursor, go back by the distance, that's where origin sits
+      const newX = mouseX - (mouseX - prev.x) * (newZoom / prev.zoom);
+      const newY = mouseY - (mouseY - prev.y) * (newZoom / prev.zoom);
+
+      return { ...prev, zoom: newZoom, x: newX, y: newY };
     });
   }, []);
 
@@ -109,6 +118,9 @@ export function useCamera() {
         // pinch zoom
         const dist = getTouchDistance(e.touches);
 
+        const midX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+        const midY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+
         // sets the first frame
         if (lastTouchDist.current && lastTouchDist.current > 0) {
           const scale = dist / lastTouchDist.current;
@@ -117,7 +129,11 @@ export function useCamera() {
               Math.max(prev.zoom * scale, minZoom),
               maxZoom,
             );
-            return { ...prev, zoom: newZoom };
+
+            // use midpoint between two fingers == cursor
+            const newX = midX - (midX - prev.x) * (newZoom / prev.zoom);
+            const newY = midY - (midY - prev.y) * (newZoom / prev.zoom);
+            return { x: newX, y: newY, zoom: newZoom };
           });
         }
 
