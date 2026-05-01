@@ -7,6 +7,7 @@ import {
   type Icon,
 } from "@phosphor-icons/react";
 import Tooltip from "../reusables/tooltip";
+import { sectionPositions } from "../../constants/sections";
 
 interface NavigationComponent {
   icon: Icon;
@@ -14,11 +15,27 @@ interface NavigationComponent {
   y: number;
 }
 const navigationComponents: NavigationComponent[] = [
-  { icon: FlagIcon, x: 0, y: 0 },
-  { icon: HammerIcon, x: 0, y: 0 },
-  { icon: BrainIcon, x: 0, y: 0 },
-  { icon: BriefcaseIcon, x: 0, y: 0 },
-  { icon: GlobeIcon, x: 0, y: 0 },
+  { icon: FlagIcon, x: sectionPositions.start.x, y: sectionPositions.start.y },
+  {
+    icon: HammerIcon,
+    x: sectionPositions.projects.x,
+    y: sectionPositions.projects.y,
+  },
+  {
+    icon: BrainIcon,
+    x: sectionPositions.skills.x,
+    y: sectionPositions.skills.y,
+  },
+  {
+    icon: BriefcaseIcon,
+    x: sectionPositions.experience.x,
+    y: sectionPositions.experience.y,
+  },
+  {
+    icon: GlobeIcon,
+    x: sectionPositions.travels.x,
+    y: sectionPositions.travels.y,
+  },
 ];
 
 interface Props {
@@ -33,7 +50,7 @@ export default function Navigation({ panTo }: Props) {
           const iconSize = 20;
           const IconComponent = component.icon;
 
-          if (component.icon !== FlagIcon) {
+          if (![FlagIcon, HammerIcon].includes(component.icon)) {
             return (
               <Tooltip key={index} label="WIP">
                 <li key={index} className={styles}>

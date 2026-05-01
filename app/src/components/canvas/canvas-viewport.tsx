@@ -1,7 +1,11 @@
+import { sectionPositions } from "../../constants/sections";
 import { useCamera } from "../../hooks/useCamera";
-import StartSection from "../content/start-section";
+import useElementSize from "../../hooks/useElementSize";
+import Projects from "../content/projects";
+import Start from "../content/start";
 import Navigation from "../layout/navigation";
 import CanvasWorld from "./canvas-world";
+import Section from "./section";
 
 export default function CanvasViewport() {
   const {
@@ -14,6 +18,11 @@ export default function CanvasViewport() {
     onTouchMove,
     panTo,
   } = useCamera();
+
+  // sizes of each section
+  const { ref: startRef, size: startSize } = useElementSize<HTMLDivElement>();
+  const { ref: projectsRef, size: projectsSize } =
+    useElementSize<HTMLDivElement>();
 
   return (
     <div
@@ -37,7 +46,21 @@ export default function CanvasViewport() {
 
       {/* canvas items */}
       <CanvasWorld x={camera.x} y={camera.y} zoom={camera.zoom}>
-        <StartSection />
+        <Section
+          ref={startRef}
+          x={sectionPositions.start.x - startSize.width / 2}
+          y={sectionPositions.start.y - startSize.height / 2}
+        >
+          <Start />
+        </Section>
+
+        <Section
+          ref={projectsRef}
+          x={sectionPositions.projects.x - projectsSize.width / 2}
+          y={sectionPositions.projects.y - 250}
+        >
+          <Projects />
+        </Section>
       </CanvasWorld>
     </div>
   );
