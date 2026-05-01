@@ -40,7 +40,7 @@ export default function Projects() {
 
       <div className="space-y-8">
         <div>
-          <h3 className="text-base font-bold mb-4">Why?</h3>
+          <h3 className="text-base font-bold mb-3">Why?</h3>
           <p>
             Bring back the beauty of life pre-phones, where people were living
             in the moment and interacting, rather than being hypnotized by a
