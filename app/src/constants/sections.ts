@@ -5,3 +5,11 @@ export const sectionPositions = {
   experience: { x: 0, y: 0 },
   travels: { x: 0, y: 0 },
 };
+
+export const projectPositions = {
+  detach: sectionPositions.projects,
+  sip: {
+    x: sectionPositions.projects.x + 400,
+    y: sectionPositions.projects.y,
+  },
+};

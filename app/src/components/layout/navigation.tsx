@@ -63,7 +63,15 @@ export default function Navigation({ panTo }: Props) {
               <li
                 key={index}
                 className={styles}
-                onClick={() => panTo(component.x, component.y)}
+                onClick={() => {
+                  // for the projects section, shift slightly down.
+                  if (component.icon === HammerIcon) {
+                    panTo(component.x, component.y + 250);
+                    return;
+                  }
+
+                  panTo(component.x, component.y);
+                }}
               >
                 <IconComponent size={iconSize} weight="bold" />
               </li>

@@ -1,7 +1,8 @@
-import { sectionPositions } from "../../constants/sections";
+import { projectPositions, sectionPositions } from "../../constants/sections";
 import { useCamera } from "../../hooks/useCamera";
 import useElementSize from "../../hooks/useElementSize";
-import Projects from "../content/projects";
+import Detach from "../content/projects/detach";
+import Sip from "../content/projects/sip";
 import Start from "../content/start";
 import Navigation from "../layout/navigation";
 import CanvasWorld from "./canvas-world";
@@ -21,8 +22,7 @@ export default function CanvasViewport() {
 
   // sizes of each section
   const { ref: startRef, size: startSize } = useElementSize<HTMLDivElement>();
-  const { ref: projectsRef, size: projectsSize } =
-    useElementSize<HTMLDivElement>();
+  const { ref: detachRef, size: detachSize } = useElementSize<HTMLDivElement>();
 
   return (
     <div
@@ -54,12 +54,17 @@ export default function CanvasViewport() {
           <Start />
         </Section>
 
+        {/* projects */}
         <Section
-          ref={projectsRef}
-          x={sectionPositions.projects.x - projectsSize.width / 2}
-          y={sectionPositions.projects.y - 250}
+          ref={detachRef}
+          x={projectPositions.detach.x - detachSize.width / 2}
+          y={projectPositions.detach.y}
         >
-          <Projects />
+          <Detach />
+        </Section>
+
+        <Section x={projectPositions.sip.x} y={projectPositions.sip.y}>
+          <Sip />
         </Section>
       </CanvasWorld>
     </div>

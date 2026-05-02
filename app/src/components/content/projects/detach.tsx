@@ -1,12 +1,12 @@
-import Badge from "../reusables/badge";
+import Badge from "../../reusables/badge";
 
-export default function Projects() {
+export default function Detach() {
   return (
     <div className="w-lg flex flex-col">
       <div className="mb-6">
         <h2 className="font-bold text-xl">Detach</h2>
         <p className="font-bold text-base text-black/30 ">
-          (March 2026 - in progress)
+          March 2026 - in progress
         </p>
       </div>
 
@@ -34,7 +34,7 @@ export default function Projects() {
         <img
           src="/images/detach-card.png"
           alt="Detach cards"
-          className="w-1/2 pointer-events-none select-none"
+          className="w-1/2 pointer-events-none select-none -scale-x-100 -scale-y-100"
         />
       </div>
 

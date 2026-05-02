@@ -5,6 +5,7 @@ import {
   MailboxIcon,
 } from "@phosphor-icons/react";
 import { GitHubCalendar } from "react-github-calendar";
+import Link from "../reusables/link";
 
 const contactInfo = [
   {
@@ -69,15 +70,7 @@ export default function Start() {
                   <li key={index} className="flex gap-3">
                     <IconComponent size={18} weight="bold" />
                     {info.url ? (
-                      <a
-                        href={info.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-sky-500 hover:cursor-pointer"
-                        onPointerDown={(e) => e.stopPropagation()}
-                      >
-                        {info.text}
-                      </a>
+                      <Link href={info.url}>{info.text}</Link>
                     ) : (
                       <span
                         onPointerMove={(e) => e.stopPropagation()}
