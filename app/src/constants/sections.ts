@@ -9,7 +9,11 @@ export const sectionPositions = {
 export const projectPositions = {
   detach: sectionPositions.projects,
   sip: {
-    x: sectionPositions.projects.x + 400,
+    x: sectionPositions.projects.x + 380,
+    y: sectionPositions.projects.y,
+  },
+  songdle: {
+    x: sectionPositions.projects.x + 1025,
     y: sectionPositions.projects.y,
   },
 };

@@ -3,6 +3,7 @@ import { useCamera } from "../../hooks/useCamera";
 import useElementSize from "../../hooks/useElementSize";
 import Detach from "../content/projects/detach";
 import Sip from "../content/projects/sip";
+import Songdle from "../content/projects/songdle";
 import Start from "../content/start";
 import Navigation from "../layout/navigation";
 import CanvasWorld from "./canvas-world";
@@ -65,6 +66,10 @@ export default function CanvasViewport() {
 
         <Section x={projectPositions.sip.x} y={projectPositions.sip.y}>
           <Sip />
+        </Section>
+
+        <Section x={projectPositions.songdle.x} y={projectPositions.songdle.y}>
+          <Songdle />
         </Section>
       </CanvasWorld>
     </div>
