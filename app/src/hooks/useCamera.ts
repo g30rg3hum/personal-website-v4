@@ -1,7 +1,7 @@
 import { useCallback, useRef, useState } from "react";
 
-const maxZoom = 2;
-const minZoom = 0.5;
+export const maxZoom = 2;
+export const minZoom = 0.5;
 
 export function useCamera() {
   const [camera, setCamera] = useState({
@@ -54,7 +54,7 @@ export function useCamera() {
     isPanning.current = false;
   }, []);
 
-  const onWheel = useCallback((e: React.WheelEvent) => {
+  /* const onWheel = useCallback((e: React.WheelEvent) => {
     e.preventDefault();
 
     // smooth and gradual zooming
@@ -77,7 +77,7 @@ export function useCamera() {
 
       return { ...prev, zoom: newZoom, x: newX, y: newY };
     });
-  }, []);
+  }, []); */
 
   const getTouchDistance = (touches: React.TouchList) => {
     const dx = touches[0].clientX - touches[1].clientX;
@@ -197,9 +197,10 @@ export function useCamera() {
     onPointerDown,
     onPointerMove,
     onPointerUp,
-    onWheel,
+    // onWheel,
     onTouchMove,
     onTouchEnd,
     panTo,
+    setCamera,
   };
 }

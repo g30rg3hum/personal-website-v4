@@ -1,5 +1,5 @@
 import { projectPositions, sectionPositions } from "../../constants/sections";
-import { useCamera } from "../../hooks/useCamera";
+import { useCamera, maxZoom, minZoom } from "../../hooks/useCamera";
 import useElementSize from "../../hooks/useElementSize";
 import Detach from "../content/projects/detach";
 import Sip from "../content/projects/sip";
@@ -8,6 +8,7 @@ import Start from "../content/start";
 import Navigation from "../layout/navigation";
 import CanvasWorld from "./canvas-world";
 import Section from "./section";
+import { useRef, useEffect } from "react";
 
 export default function CanvasViewport() {
   const {
@@ -15,15 +16,53 @@ export default function CanvasViewport() {
     onPointerDown,
     onPointerMove,
     onPointerUp,
-    onWheel,
+    // onWheel,
     onTouchEnd,
     onTouchMove,
     panTo,
+    setCamera,
   } = useCamera();
 
   // sizes of each section
   const { ref: startRef, size: startSize } = useElementSize<HTMLDivElement>();
   const { ref: detachRef, size: detachSize } = useElementSize<HTMLDivElement>();
+
+  // viewport ref
+  const viewportRef = useRef<HTMLDivElement | null>(null);
+  // assign onWheel non-passive listener
+  useEffect(() => {
+    const viewportEl = viewportRef.current;
+    if (!viewportEl) return;
+
+    const wheelHandler = (e: WheelEvent) => {
+      // stops default behaviour e.g. browser zoom and h/v scroll
+      e.preventDefault();
+
+      const zoomIntensity = e.ctrlKey ? 0.99 : 0.999;
+      const zoomFactor = zoomIntensity ** e.deltaY;
+      // console.log(`ctrlKey: ${e.ctrlKey}, zoomFactor: ${zoomFactor}`);
+
+      setCamera((prev) => {
+        const newZoom = Math.min(
+          Math.max(prev.zoom * zoomFactor, minZoom),
+          maxZoom,
+        );
+
+        const mouseX = e.clientX;
+        const mouseY = e.clientY;
+
+        const newX = mouseX - (mouseX - prev.x) * (newZoom / prev.zoom);
+        const newY = mouseY - (mouseY - prev.y) * (newZoom / prev.zoom);
+
+        return { ...prev, zoom: newZoom, x: newX, y: newY };
+      });
+    };
+
+    viewportEl.addEventListener("wheel", wheelHandler, { passive: false });
+    return () => {
+      viewportEl.removeEventListener("wheel", wheelHandler);
+    };
+  }, [setCamera]);
 
   return (
     <div
@@ -31,7 +70,7 @@ export default function CanvasViewport() {
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
       onPointerUp={onPointerUp}
-      onWheel={onWheel}
+      // onWheel={onWheel}
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}
       style={{
@@ -41,6 +80,7 @@ export default function CanvasViewport() {
         backgroundSize: `${30 * camera.zoom}px ${30 * camera.zoom}px`,
         backgroundPosition: `${camera.x}px ${camera.y}px`,
       }}
+      ref={viewportRef}
     >
       {/* sticky navigation */}
       <Navigation panTo={panTo} />

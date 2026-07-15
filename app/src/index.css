@@ -5,4 +5,5 @@ html {
   font-family: "Manrope", sans-serif;
   overflow: hidden;
   touch-action: none;
+  overscroll-behavior: none;
 }

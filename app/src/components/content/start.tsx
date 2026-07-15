@@ -87,19 +87,6 @@ export default function Start() {
             <p>
               It is currently <b>{formattedTime}</b> where I'm at.
             </p>
-            <p>
-              At the moment, I am <b>job-hunting whilst building</b>
-              <img
-                src="/images/icons/detach.png"
-                alt="Detach icon"
-                className="inline-block h-5 mr-1"
-              />
-              .
-            </p>
-            <p className="text-xs font-bold text-black/30">
-              Side note: this site is work in progress. <br />
-              Rolling out updates incrementally.
-            </p>
           </div>
         </div>
         <GitHubCalendar
