@@ -52,7 +52,9 @@ export default function Start() {
         <div className="w-sm h-max">
           <div className="flex gap-4 items-center mb-6">
             <h1 className="text-3xl font-bold">George Hum</h1>
-            <span className="text-black/30 font-bold">(or Hum Weng Wong)</span>
+            <span className="text-black/30 font-semibold">
+              (or Hum Weng Wong)
+            </span>
           </div>
           <div className="space-y-6">
             <p>
