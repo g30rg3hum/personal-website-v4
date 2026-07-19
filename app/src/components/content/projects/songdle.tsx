@@ -1,5 +1,6 @@
 // import { CaretRightIcon } from "@phosphor-icons/react";
 import Badge from "../../reusables/badge";
+import Link from "../../reusables/link";
 
 export default function Songdle() {
   return (
@@ -17,11 +18,15 @@ export default function Songdle() {
         <p className="text-base text-black/50">December 2025 - February 2026</p>
       </div>
 
-      <p className="mb-12">
+      <p className="mb-6">
         Web game that is a music-based version of the famous New York Times,
         word-guessing game, Wordle. Players have to guess the song based on a
         short audio clip.
       </p>
+
+      <div className="flex gap-3 mb-8">
+        <Link href="https://www.songdle.fun/">Website</Link>
+      </div>
 
       <iframe
         width={560 * 0.9}
@@ -35,7 +40,7 @@ export default function Songdle() {
 
       <div className="space-y-8">
         <div className="space-y-3">
-          <h3 className="text-base font-bold">Why?</h3>
+          <h3 className="text-base font-bold">Context</h3>
           <p>
             My friends and I were playing Wordle over Discord, and eventually
             that led to looking for other Wordle-spinoffs. Since we love music,
@@ -50,7 +55,7 @@ export default function Songdle() {
         </div>
 
         <div>
-          <h3 className="text-base font-bold mb-4">How?</h3>
+          <h3 className="text-base font-bold mb-4">Tech</h3>
           <div className="flex gap-4 mb-6 flex-wrap">
             <Badge>
               <img

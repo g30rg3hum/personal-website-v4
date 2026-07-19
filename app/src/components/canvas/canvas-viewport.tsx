@@ -2,6 +2,7 @@ import { projectPositions, sectionPositions } from "../../constants/sections";
 import { useCamera, maxZoom, minZoom } from "../../hooks/useCamera";
 import useElementSize from "../../hooks/useElementSize";
 import Detach from "../content/projects/detach";
+import KTool from "../content/projects/k-tool";
 import Sip from "../content/projects/sip";
 import Songdle from "../content/projects/songdle";
 import Start from "../content/start";
@@ -110,6 +111,10 @@ export default function CanvasViewport() {
 
         <Section x={projectPositions.songdle.x} y={projectPositions.songdle.y}>
           <Songdle />
+        </Section>
+
+        <Section x={projectPositions.kTool.x} y={projectPositions.kTool.y}>
+          <KTool />
         </Section>
       </CanvasWorld>
     </div>

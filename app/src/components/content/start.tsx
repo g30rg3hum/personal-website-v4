@@ -89,6 +89,7 @@ export default function Start() {
             <p>
               It is currently <b>{formattedTime}</b> where I'm at.
             </p>
+            <p>(I'm currently gradually adding to the website!)</p>
           </div>
         </div>
         <GitHubCalendar

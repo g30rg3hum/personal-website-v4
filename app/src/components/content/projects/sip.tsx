@@ -45,7 +45,7 @@ export default function Sip() {
 
       <div className="space-y-8">
         <div className="space-y-3">
-          <h3 className="text-base font-bold">Why?</h3>
+          <h3 className="text-base font-bold">The story</h3>
           <p>
             I found myself feeling off whenever I didn't drink enough water
             throughout the day. My mouth would also always feel dry, and I have

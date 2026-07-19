@@ -16,4 +16,8 @@ export const projectPositions = {
     x: sectionPositions.projects.x + 1015,
     y: sectionPositions.projects.y,
   },
+  kTool: {
+    x: sectionPositions.projects.x + 1650,
+    y: sectionPositions.projects.y,
+  },
 };
