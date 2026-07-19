@@ -13,7 +13,7 @@ export const projectPositions = {
     y: sectionPositions.projects.y,
   },
   songdle: {
-    x: sectionPositions.projects.x + 1025,
+    x: sectionPositions.projects.x + 1015,
     y: sectionPositions.projects.y,
   },
 };

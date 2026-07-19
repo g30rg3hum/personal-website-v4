@@ -43,10 +43,11 @@ interface Props {
 }
 export default function Navigation({ panTo }: Props) {
   return (
-    <nav className="absolute z-50 bottom-8 left-1/2 -translate-x-1/2 bg-black text-white p-2 rounded-lg shadow-md">
+    <nav className="absolute z-50 bottom-8 left-1/2 -translate-x-1/2 bg-gray-200 text-white p-2 rounded-lg shadow-md border-gray-300 border">
       <ul className="font-bold flex gap-2">
         {navigationComponents.map((component, index) => {
-          const styles = "hover:bg-white/15 p-2 rounded-md transition-colors";
+          const styles =
+            "hover:bg-black/15 p-2 text-gray-500 rounded-md transition-colors";
           const iconSize = 20;
           const IconComponent = component.icon;
 
@@ -54,7 +55,7 @@ export default function Navigation({ panTo }: Props) {
             return (
               <Tooltip key={index} label="WIP">
                 <li key={index} className={styles}>
-                  <IconComponent size={iconSize} weight="bold" />
+                  <IconComponent size={iconSize} weight="regular" />
                 </li>
               </Tooltip>
             );
@@ -73,7 +74,7 @@ export default function Navigation({ panTo }: Props) {
                   panTo(component.x, component.y);
                 }}
               >
-                <IconComponent size={iconSize} weight="bold" />
+                <IconComponent size={iconSize} weight="regular" />
               </li>
             );
           }

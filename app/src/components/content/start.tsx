@@ -68,7 +68,7 @@ export default function Start() {
                 const IconComponent = info.icon;
                 return (
                   <li key={index} className="flex gap-3">
-                    <IconComponent size={18} weight="bold" />
+                    <IconComponent size={18} />
                     {info.url ? (
                       <Link href={info.url}>{info.text}</Link>
                     ) : (
