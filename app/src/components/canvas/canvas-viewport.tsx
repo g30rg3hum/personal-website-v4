@@ -5,6 +5,7 @@ import Detach from "../content/projects/detach";
 import KTool from "../content/projects/k-tool";
 import Sip from "../content/projects/sip";
 import Songdle from "../content/projects/songdle";
+import Tairun from "../content/projects/tairun";
 import Start from "../content/start";
 import Navigation from "../layout/navigation";
 import CanvasWorld from "./canvas-world";
@@ -115,6 +116,10 @@ export default function CanvasViewport() {
 
         <Section x={projectPositions.kTool.x} y={projectPositions.kTool.y}>
           <KTool />
+        </Section>
+
+        <Section x={projectPositions.tairun.x} y={projectPositions.tairun.y}>
+          <Tairun />
         </Section>
       </CanvasWorld>
     </div>

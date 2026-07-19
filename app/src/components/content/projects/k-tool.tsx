@@ -8,12 +8,12 @@ export default function KTool() {
         <div className="flex gap-4 mb-3 items-center">
           <img
             src="/images/icons/k-tool.png"
-            alt="Detach icon"
+            alt="K-Tool icon"
             className="h-4"
           />
           <h2 className="font-bold text-xl">K-Tool Engineering</h2>
         </div>
-        <p className="text-base text-black/60">March 2026 - Present</p>
+        <p className="text-base text-black/60">July - September 2025</p>
       </div>
 
       <p className="mb-6">

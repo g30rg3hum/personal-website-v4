@@ -20,4 +20,8 @@ export const projectPositions = {
     x: sectionPositions.projects.x + 1650,
     y: sectionPositions.projects.y,
   },
+  tairun: {
+    x: sectionPositions.projects.x + 2285,
+    y: sectionPositions.projects.y,
+  },
 };
