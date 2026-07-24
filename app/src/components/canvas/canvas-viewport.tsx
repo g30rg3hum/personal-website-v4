@@ -3,6 +3,7 @@ import { useCamera, maxZoom, minZoom } from "../../hooks/useCamera";
 import useElementSize from "../../hooks/useElementSize";
 import Detach from "../content/projects/detach";
 import KTool from "../content/projects/k-tool";
+import MobVis from "../content/projects/mobvis";
 import Sip from "../content/projects/sip";
 import Songdle from "../content/projects/songdle";
 import Tairun from "../content/projects/tairun";
@@ -120,6 +121,10 @@ export default function CanvasViewport() {
 
         <Section x={projectPositions.tairun.x} y={projectPositions.tairun.y}>
           <Tairun />
+        </Section>
+
+        <Section x={projectPositions.mobVis.x} y={projectPositions.mobVis.y}>
+          <MobVis />
         </Section>
       </CanvasWorld>
     </div>

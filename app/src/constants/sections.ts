@@ -24,4 +24,8 @@ export const projectPositions = {
     x: sectionPositions.projects.x + 2285,
     y: sectionPositions.projects.y,
   },
+  mobVis: {
+    x: sectionPositions.projects.x + 2920,
+    y: sectionPositions.projects.y,
+  },
 };
