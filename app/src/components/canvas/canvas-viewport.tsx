@@ -4,6 +4,7 @@ import useElementSize from "../../hooks/useElementSize";
 import Detach from "../content/projects/detach";
 import KTool from "../content/projects/k-tool";
 import MobVis from "../content/projects/mobvis";
+import Rsvpy from "../content/projects/rsvpy";
 import Sip from "../content/projects/sip";
 import Songdle from "../content/projects/songdle";
 import Tairun from "../content/projects/tairun";
@@ -125,6 +126,10 @@ export default function CanvasViewport() {
 
         <Section x={projectPositions.mobVis.x} y={projectPositions.mobVis.y}>
           <MobVis />
+        </Section>
+
+        <Section x={projectPositions.rsvpy.x} y={projectPositions.rsvpy.y}>
+          <Rsvpy />
         </Section>
       </CanvasWorld>
     </div>

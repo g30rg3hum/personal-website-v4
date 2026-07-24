@@ -28,4 +28,8 @@ export const projectPositions = {
     x: sectionPositions.projects.x + 2920,
     y: sectionPositions.projects.y,
   },
+  rsvpy: {
+    x: sectionPositions.projects.x + 3555,
+    y: sectionPositions.projects.y,
+  },
 };
